@@ -118,9 +118,7 @@ a <-
     legend.show = FALSE,
     title = 'Ashtree density',
     style = 'cont',
-    #palette = c('lightyellow', 'darkgreen' )
-     palette = 'Reds',
-    ) +
+    palette = 'Reds') +
   tm_shape(california) %>% +
   tm_borders(lwd = 1, col = 'gray20') +
   tm_shape(ashtrees_sf) +
@@ -152,8 +150,6 @@ a <-
     legend.title.size = 1.2,
     legend.title.fontface = 'bold')
 
-a
-
 tmap_save(
   a,
   'output/figures/ash_density.jpg',
@@ -161,14 +157,14 @@ tmap_save(
   width = 8,
   dpi = 300)
 
+# map in ggplot -----------------------------------------------------------
 ash_df <- rasterdf(ash_grid)
-
 
 ggplot(data = ash_df) +
   geom_raster(aes(x = x,
                   y = y,
                   fill = value)) +
-  scale_fill_gradient(name = "Subalpine Fir",
+  scale_fill_gradient(name = "Native ashtrees",
                       low = "lightyellow",
                       high = "darkgreen",
                       na.value = NA) +
@@ -178,10 +174,4 @@ ggplot(data = ash_df) +
   coord_sf(expand = F) +
   theme_void()
 
-
-
-
-
-
-ggsave('p1.png', width = 7, height = 8)
-
+ggsave('output/figures/ash.png', width = 7, height = 8)
